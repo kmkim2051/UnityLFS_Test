@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+// add using voice
+using Photon.Voice.Unity;
 using UnityEngine.UI;
 
 
@@ -28,6 +30,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
   public InputField ChatInput;
   public Button ScreenToggleBtn;
 
+  // public Button RecorderToggleBtn;
+  // public Text RecorderText;
+  // public Recorder recorder;
+
   [Header("ETC")]
   public Text StatusText;
   public PhotonView PV;
@@ -44,6 +50,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     else if (num == -1) ++currentPage;
     else PhotonNetwork.JoinRoom(myList[multiple + num].Name);
     MyListRenewal();
+
   }
 
   void MyListRenewal()
@@ -127,8 +134,22 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     RoomRenewal();
     ChatInput.text = "";
     for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
+
+
   }
 
+  // voice(recorder) on/off
+  // public void SetRecorder()
+  // {
+
+  //   // recorder.SourceType = Recorder.InputSourceType.Microphone;
+  //   recorder.IsRecording = !recorder.IsRecording;
+  //   // if (recorder.IsRecording)
+  //   //   RecorderText.text = "R";
+  //   // else
+  //   //   RecorderText.text = "!R";
+
+  // }
   public override void OnCreateRoomFailed(short returnCode, string message) { RoomInput.text = ""; CreateRoom(); }
 
   public override void OnJoinRandomFailed(short returnCode, string message) { RoomInput.text = ""; CreateRoom(); }
